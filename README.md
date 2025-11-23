@@ -1,32 +1,76 @@
-# agui-cv
+# CopilotKit <> Mastra Starter
 
-**agui-cv** is an intelligent application designed to revolutionize the job application process. By leveraging **AGUI (Agentic GUI)** concepts and the power of **Large Language Models (LLMs)**, this tool dynamically generates tailored resumes that align perfectly with specific job descriptions.
+This is a starter template for building AI agents using [Mastra](https://mastra.ai) and [CopilotKit](https://copilotkit.ai). It provides a modern Next.js application with integrated AI capabilities and a beautiful UI.
 
-> [!NOTE]
-> This project is currently under active development.
+## Prerequisites
 
-## 🚀 Features
+- Node.js 18+ 
+- Any of the following package managers:
+  - pnpm (recommended)
+  - npm
+  - yarn
+  - bun
 
-- **Dynamic Resume Generation**: Automatically rewrites and reformats your resume to highlight the most relevant skills and experiences for a specific job opening.
-- **Job Description Analysis**: Uses LLMs to parse job descriptions, identifying key requirements, keywords, and cultural fit indicators.
-- **AGUI-Driven Interface**: Features a fluid, agentic user interface that guides you through the tailoring process, offering suggestions and real-time previews.
-- **Smart Gap Analysis**: Identifies missing skills or qualifications in your profile relative to the job description and suggests improvements.
-- **Multi-Format Export**: Generate resumes in PDF, Markdown, or DOCX formats.
+> **Note:** This repository ignores lock files (package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb) to avoid conflicts between different package managers. Each developer should generate their own lock file using their preferred package manager. After that, make sure to delete it from the .gitignore.
 
-## 🛠️ Technology Stack
+## Getting Started
 
-- **Core**: AGUI (Agentic GUI) Concepts
-- **AI/LLM**: Integration with advanced LLMs (e.g., Gemini, GPT-4) for text analysis and generation.
-- **Frontend**: Modern web technologies for a responsive and interactive experience.
+1. Add your OpenAI API key
+```bash
+# you can use whatever model Mastra supports
+echo "OPENAI_API_KEY=your-key-here" >> .env
+```
 
-## 📦 Getting Started
+2. Install dependencies using your preferred package manager:
+```bash
+# Using pnpm (recommended)
+pnpm install
 
-*(Instructions for installation and usage will be added here)*
+# Using npm
+npm install
 
-## 🤝 Contributing
+# Using yarn
+yarn install
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+# Using bun
+bun install
+```
 
-## 📄 License
+2. Start the development server:
+```bash
+# Using pnpm
+pnpm dev
 
-[MIT](LICENSE)
+# Using npm
+npm run dev
+
+# Using yarn
+yarn dev
+
+# Using bun
+bun run dev
+```
+
+This will start both the UI and agent servers concurrently.
+
+## Available Scripts
+The following scripts can also be run using your preferred package manager:
+- `dev` - Starts both UI and agent servers in development mode
+- `dev:debug` - Starts development servers with debug logging enabled
+- `build` - Builds the application for production
+- `start` - Starts the production server
+- `lint` - Runs ESLint for code linting
+
+## Documentation
+
+- [Mastra Documentation](https://mastra.ai/en/docs) - Learn more about Mastra and its features
+- [CopilotKit Documentation](https://docs.copilotkit.ai) - Explore CopilotKit's capabilities
+- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
