@@ -2,10 +2,11 @@
 
 import dynamic from "next/dynamic";
 import { AgentState } from "@/lib/types";
-import { useCoAgent } from "@copilotkit/react-core";
+import { useCoAgent, useCopilotReadable } from "@copilotkit/react-core";
 import { CopilotChat, useCopilotChatSuggestions } from "@copilotkit/react-ui";
 import { useState } from "react";
 import { useCopilotAction } from "@copilotkit/react-core";
+import { parseResumeFile, estimateTokenCount } from "@/lib/resume-parser";
 
 // Dynamically import PdfPreview to avoid SSR issues with pdfjs
 const PdfPreview = dynamic(
@@ -16,6 +17,59 @@ const PdfPreview = dynamic(
 export default function ResumeBuilderPage() {
   const [isDownloading, setIsDownloading] = useState(false);
   const [latexContent, setLatexContent] = useState<string>("");
+  const [uploadedResumeText, setUploadedResumeText] = useState<string>("");
+  const [uploadedFileName, setUploadedFileName] = useState<string>("");
+
+  // Make uploaded resume context available to the agent
+  useCopilotReadable({
+    description: "The user's existing resume content that they uploaded. Use this as context to understand their background, work experience, education, skills, and achievements when generating or improving their new resume. Preserve all factual information unless the user requests specific changes.",
+    value: uploadedResumeText,
+  });
+
+  // Action: Upload existing resume
+  useCopilotAction({
+    name: "uploadResume",
+    description: "Allow the user to upload their existing resume (PDF, DOCX, or TXT) to use as context for generating or improving a new resume",
+    parameters: [],
+    handler: async () => {
+      return new Promise((resolve) => {
+        // Create file input programmatically
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.pdf,.docx,.txt';
+        
+        input.onchange = async (e) => {
+          const file = (e.target as HTMLInputElement).files?.[0];
+          if (!file) {
+            resolve("No file selected.");
+            return;
+          }
+
+          try {
+            // Parse the resume file
+            const extractedText = await parseResumeFile(file);
+            const tokenCount = estimateTokenCount(extractedText);
+            
+            // Update state
+            setUploadedResumeText(extractedText);
+            setUploadedFileName(file.name);
+            
+            resolve(`✓ Resume uploaded successfully!\n\nFile: ${file.name}\nSize: ${(file.size / 1024).toFixed(1)} KB\nExtracted: ${extractedText.length.toLocaleString()} characters (~${tokenCount.toLocaleString()} tokens)\n\nI now have access to your resume details. What would you like me to help you with?`);
+          } catch (error) {
+            console.error('Error parsing resume:', error);
+            resolve(`Failed to parse resume: ${(error as Error).message}. Please try a different file.`);
+          }
+        };
+
+        input.oncancel = () => {
+          resolve("File upload cancelled.");
+        };
+
+        // Trigger file picker
+        input.click();
+      });
+    },
+  });
 
   useCopilotAction({
     name: "previewResume",
@@ -44,7 +98,7 @@ export default function ResumeBuilderPage() {
 
   // 💡 Chat Suggestions - Quick Start Templates
   useCopilotChatSuggestions({
-    instructions: "Suggest quick-start templates for creating a resume",
+    instructions: "Suggest options for creating a resume: uploading an existing resume to improve, or quick-start templates for creating from scratch",
     minSuggestions: 2,
     maxSuggestions: 3,
   });
@@ -91,12 +145,35 @@ export default function ResumeBuilderPage() {
         <div className="p-4 border-b border-gray-100">
           <h1 className="text-xl font-bold text-gray-800">AGUI CV</h1>
         </div>
+        
+        {/* Upload Status Indicator */}
+        {uploadedFileName && (
+          <div className="px-4 py-2 bg-green-50 border-b border-green-200 text-sm text-green-700 flex items-center gap-2">
+            <span>✓</span>
+            <span className="flex-1">
+              Resume uploaded: <strong>{uploadedFileName}</strong> ({uploadedResumeText.length.toLocaleString()} chars)
+            </span>
+            <button
+              onClick={() => {
+                setUploadedResumeText("");
+                setUploadedFileName("");
+              }}
+              className="text-green-600 hover:text-green-800 text-xs"
+              title="Clear uploaded resume"
+            >
+              ✕
+            </button>
+          </div>
+        )}
+        
         <div className="flex-1 overflow-hidden">
           <CopilotChat
             labels={{
               title: "Resume Assistant",
               initial: "I built this hoping it would be genuinely helpful for your career journey. Let's create a resume that opens doors for you.\n\nIf you'd like to connect, I'm on [LinkedIn](https://linkedin.com/in/vivek31singh) and [X](https://x.com/vivek31singh).",
             }}
+            
+            inputFileAccept=".pdf,.doc,.docx,.txt"
             className="h-full"
           />
         </div>

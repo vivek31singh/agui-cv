@@ -26,6 +26,7 @@
     "@mastra/memory": "0.15.6",
     "@react-pdf/renderer": "^4.3.1",
     "libsql": "^0.5.22",
+    "mammoth": "^1.11.0",
     "mastra": "0.15.1",
     "next": ">=15.5.4",
     "pdfjs-dist": "^5.4.394",

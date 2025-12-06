@@ -142,8 +142,8 @@ export function PdfPreview({ latexContent }: PdfPreviewProps) {
         >
           <Page
             pageNumber={pageNumber}
-            renderTextLayer={true}
-            renderAnnotationLayer={true}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
             className="shadow-lg"
           />
         </Document>
