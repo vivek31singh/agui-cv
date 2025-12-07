@@ -50,7 +50,7 @@ AGUI CV solves a common problem: creating professional, ATS-friendly resumes is 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/agui-cv.git
+git clone https://github.com/vivek31singh/agui-cv.git
 cd agui-cv
 ```
 
