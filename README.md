@@ -243,8 +243,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Built by [Vivek Singh](https://linkedin.com/in/vivek31singh)
 
-- LinkedIn: [@vivek31singh](https://www.linkedin.com/in/vivek-singh05/)
-- Twitter/X: [@vivek31singh](https://x.com/VivekSingh_003)
+- LinkedIn: [@vivek-singh05](https://www.linkedin.com/in/vivek-singh05/)
+- Twitter/X: [@VivekSingh_003](https://x.com/VivekSingh_003)
 ---
 
 ⭐ If you find this project helpful, please consider giving it a star!
