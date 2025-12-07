@@ -11,7 +11,7 @@ export const AgentState = z.object({
 
 export const resumeAgent = new Agent({
   name: "Resume Agent",
-  model: "zhipuai-coding-plan/glm-4.6",
+  model: process.env.RESUME_AGENT_MODEL || "zhipuai-coding-plan/glm-4.6",
   instructions: ({ runtimeContext }) => {
     const agUiContext = runtimeContext.get('ag-ui') as { context?: Array<{ description?: string; value?: string }> } | undefined;
     const contextData = agUiContext?.context || [];
