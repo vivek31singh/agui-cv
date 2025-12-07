@@ -6,6 +6,8 @@ Built with [Mastra AI](https://mastra.ai) for agent orchestration and [CopilotKi
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+<img width="1919" height="824" alt="Screenshot 2025-12-07 171656" src="https://github.com/user-attachments/assets/e7e562a4-5a61-406c-9237-f89733a00d2a" />
+
 ## Overview
 
 AGUI CV solves a common problem: creating professional, ATS-friendly resumes is time-consuming and requires design and formatting skills that many people don't have. Instead of spending hours on formatting and second-guessing content, users can have a conversation with an AI that understands career consulting and generates professional output automatically.
