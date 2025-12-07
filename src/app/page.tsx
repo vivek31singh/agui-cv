@@ -267,7 +267,7 @@ export default function ResumeBuilderPage() {
             <CopilotChat
               labels={{
                 title: "Resume Assistant",
-                initial: "I built this hoping it would be genuinely helpful for your career journey. Let's create a resume that opens doors for you.\n\nIf you'd like to connect, I'm on [LinkedIn](https://linkedin.com/in/vivek31singh) and [X](https://x.com/vivek31singh).",
+                initial: "I built this hoping it would be genuinely helpful for your career journey. Let's create a resume that opens doors for you.\n\nIf you'd like to connect, I'm on [LinkedIn](https://www.linkedin.com/in/vivek-singh05/) and [X](https://x.com/VivekSingh_003).",
               }}
               className="h-full"
             />
