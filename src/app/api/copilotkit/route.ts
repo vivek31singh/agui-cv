@@ -7,15 +7,15 @@ import { MastraAgent } from "@ag-ui/mastra"
 import { NextRequest } from "next/server";
 import { mastra } from "@/mastra";
 import OpenAI from "openai";
- 
+
 // 1. Configure OpenAI client to use OpenRouter
 const openai = new OpenAI({
-  apiKey: process.env.OPENROUTER_API_KEY, // OpenRouter API key from .env.local
+  apiKey: process.env.OPENROUTER_API_KEY,
   baseURL: "https://openrouter.ai/api/v1",
 });
 
 const serviceAdapter = new OpenAIAdapter({
-  model: "openai/gpt-4o-mini", // OpenRouter model identifier
+  model: "google/gemini-2.0-flash-001", // Free model on OpenRouter
   openai,
 });
 
@@ -33,6 +33,6 @@ export const POST = async (req: NextRequest) => {
     serviceAdapter,
     endpoint: "/api/copilotkit",
   });
- 
+
   return handleRequest(req);
 };
